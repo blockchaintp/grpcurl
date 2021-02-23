@@ -60,7 +60,7 @@ pipeline {
       steps {
         sh '''
             REPO=$(git remote show -n origin | grep Fetch | awk -F'[/.]' '{print $6}')
-            VERSION=`git describe --dirty`
+            VERSION=`git describe --dirty --tags`
             git archive HEAD --format=zip -9 --output=$REPO-$VERSION.zip
             git archive HEAD --format=tgz -9 --output=$REPO-$VERSION.tgz
         '''
