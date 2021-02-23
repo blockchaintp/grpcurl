@@ -1,3 +1,4 @@
+ISOLATION_ID ?= local
 dev_build_version=$(shell git describe --tags --always --dirty)
 
 # TODO: run golint and errcheck, but only to catch *new* violations and
@@ -74,3 +75,7 @@ errcheck:
 .PHONY: test
 test:
 	go test -race ./...
+
+.PHONY: buildbtp
+buildbtp:
+	docker build -t grpcurl-btp:$(ISOLATION_ID) -f Dockerfile.btp .
